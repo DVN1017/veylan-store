@@ -40,4 +40,5 @@ Le socle frontend et les pages de démonstration sont en cours de construction. 
 5. Ajouter les tests et configurer le déploiement Vercel.
 
 
-<!-- Preview deployment trigger: storefront branch -->
+<!-- Framework preset: Next.js. Build and output settings are managed by Vercel. -->
+
