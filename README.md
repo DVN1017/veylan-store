@@ -38,3 +38,6 @@ Le socle frontend et les pages de démonstration sont en cours de construction. 
 3. Implémenter la confirmation serveur et la livraison numérique.
 4. Ajouter l'administration des produits et commandes.
 5. Ajouter les tests et configurer le déploiement Vercel.
+
+
+<!-- Preview deployment trigger: storefront branch -->
