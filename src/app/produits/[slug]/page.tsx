@@ -30,7 +30,7 @@ export default async function ProductPage({ params }: Props) {
         <p className="product-detail-description">{product.description}</p>
         <div className="product-detail-price"><strong>{formatPrice(product.price)}</strong><span>Prix indicatif — fiche de démonstration</span></div>
         <div className="product-detail-includes">
-          <div><span><CheckCircle2 size={17}/></span><p><b>Un contenu ciblé</b><small>La description précise l'objectif de cette ressource.</small></p></div>
+          <div><span><CheckCircle2 size={17}/></span><p><b>Un contenu ciblé</b><small>La description précise l&apos;objectif de cette ressource.</small></p></div>
           <div><span><Download size={17}/></span><p><b>Une ressource numérique</b><small>Les modalités exactes de livraison restent à confirmer.</small></p></div>
           <div><span><ShieldCheck size={17}/></span><p><b>Achat en toute transparence</b><small>Le paiement sécurisé sera activé après configuration de Chariow.</small></p></div>
         </div>
