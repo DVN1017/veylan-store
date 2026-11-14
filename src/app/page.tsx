@@ -5,11 +5,11 @@ import { ProductCard } from "@/components/product-card";
 import { TestimonialSection } from "@/components/testimonial-section";
 
 const categories = [
-  { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/categories#formations", tone: "acid", tag: "LEARN" },
+  { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/boutique?type=Formation", tone: "acid", tag: "LEARN" },
   { n: "02", title: "Intelligence artificielle", sub: "De zéro à vos premiers projets IA", href: "/categories#ia", tone: "blue", tag: "DISCOVER" },
   { n: "03", title: "Coaching 1:1", sub: "Un accompagnement adapté à votre objectif", href: "/categories#coaching", tone: "violet", tag: "LEVEL UP" },
-  { n: "04", title: "Ebooks & guides", sub: "Des méthodes à lire et appliquer", href: "/categories#ebooks", tone: "orange", tag: "READ" },
-  { n: "05", title: "Outils & templates", sub: "Des ressources pour passer à l'action", href: "/categories#outils", tone: "steel", tag: "CREATE" },
+  { n: "04", title: "Ebooks & guides", sub: "Des méthodes à lire et appliquer", href: "/boutique?type=Ebook", tone: "orange", tag: "READ" },
+  { n: "05", title: "Outils & templates", sub: "Des ressources pour passer à l'action", href: "/boutique?type=Outil", tone: "steel", tag: "CREATE" },
 ];
 
 export default function HomePage() {
