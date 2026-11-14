@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Download, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Download, ShieldCheck, Sparkles } from "lucide-react";
 import { products, formatPrice } from "@/lib/products";
 import { BookCover } from "@/components/book-cover";
 
@@ -16,13 +16,27 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
-  return <section className="container min-h-screen py-12 md:py-20">
-    <Link href="/boutique" className="inline-flex items-center gap-2 text-xs text-[var(--muted)] hover:text-black"><ArrowLeft size={14}/> Retour à la boutique</Link>
-    <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
-      <div className="relative grid min-h-[520px] place-items-center overflow-hidden rounded-[28px] bg-[#eee8dd]"><div className="absolute left-8 top-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#9a7a4e]">VEYLAN DIGITAL EDITION / 2026</div><BookCover product={product}/><div className="absolute bottom-7 right-8 rounded-full border border-[#d5cabb] bg-white/70 px-4 py-2 text-[9px] font-bold uppercase tracking-[.16em]">Couverture de présentation</div></div>
-      <div className="max-w-xl py-6"><p className="eyebrow">{product.category} · Ressource numérique</p><h1 className="display-title mt-5">{product.title}</h1><p className="mt-6 text-base leading-8 text-[var(--muted)]">{product.description}</p><div className="mt-8 flex items-end gap-3"><span className="text-3xl font-bold tracking-tight">{formatPrice(product.price)}</span><span className="pb-1 text-xs text-[var(--muted)]">Prix indicatif de démonstration</span></div>
-        <div className="mt-8 space-y-4 border-y border-[var(--line)] py-6 text-sm text-[#55574f]"><p className="flex items-center gap-3"><CheckCircle2 size={17} className="text-[#8b9b7e]"/> Format numérique</p><p className="flex items-center gap-3"><Download size={17} className="text-[#8b9b7e]"/> Accès au fichier après achat (à configurer)</p><p className="flex items-center gap-3"><ShieldCheck size={17} className="text-[#8b9b7e]"/> Paiement via Chariow (intégration à venir)</p></div>
-        <button disabled className="mt-8 flex w-full cursor-not-allowed items-center justify-center gap-3 rounded-full bg-[#1d2b26] px-7 py-5 text-sm font-bold text-white opacity-55">Bientôt disponible <ArrowUpRight size={17}/></button><p className="mt-4 text-xs leading-6 text-[var(--muted)]">Cette fiche est une maquette. Le produit, son contenu, son tarif définitif et son lien de paiement doivent être validés avant l'ouverture des ventes.</p>
+  return <section className="container product-detail-page">
+    <Link href="/boutique" className="product-back"><ArrowLeft size={15}/> Retour à la boutique</Link>
+    <div className="product-detail-grid">
+      <div className="product-detail-art">
+        <div className="product-detail-art-top"><span>VEYLAN / DIGITAL EDITIONS</span><span>COLLECTION 2026</span></div>
+        <div className="product-detail-cover"><BookCover product={product}/></div>
+        <div className="product-detail-art-bottom"><span>APPRENDRE AVEC INTENTION</span><Sparkles size={16}/></div>
+      </div>
+      <div className="product-detail-copy">
+        <p className="eyebrow">{product.category} <span className="mx-2 text-[#b9a17d]">/</span> RESSOURCE NUMÉRIQUE</p>
+        <h1>{product.title}</h1>
+        <p className="product-detail-description">{product.description}</p>
+        <div className="product-detail-price"><strong>{formatPrice(product.price)}</strong><span>Prix indicatif — fiche de démonstration</span></div>
+        <div className="product-detail-includes">
+          <div><span><CheckCircle2 size={17}/></span><p><b>Un contenu ciblé</b><small>La description précise l'objectif de cette ressource.</small></p></div>
+          <div><span><Download size={17}/></span><p><b>Une ressource numérique</b><small>Les modalités exactes de livraison restent à confirmer.</small></p></div>
+          <div><span><ShieldCheck size={17}/></span><p><b>Achat en toute transparence</b><small>Le paiement sécurisé sera activé après configuration de Chariow.</small></p></div>
+        </div>
+        <button disabled className="product-buy-disabled">Ouverture des ventes en préparation <ArrowUpRight size={17}/></button>
+        <p className="product-demo-note">Cette fiche est encore une présentation de travail. Le contenu final, le tarif, le lien de paiement et la livraison doivent être validés avant toute vente.</p>
+        <div className="product-detail-footnote"><span>VEYLAN STORE</span><span>LEARN · BUILD · GROW</span></div>
       </div>
     </div>
   </section>;
