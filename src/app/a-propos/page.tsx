@@ -1,8 +1,50 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Compass, HeartHandshake, Lightbulb } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Compass, HeartHandshake, Lightbulb, ShieldCheck, Sparkles } from "lucide-react";
 
-export const metadata: Metadata = { title: "À propos", description: "La vision et les engagements de Veylan Store." };
+export const metadata: Metadata = { title: "À propos", description: "Découvrez la vision et les engagements de Veylan Store." };
+
+const values = [
+  { icon: Compass, number: "01", title: "Clarté", text: "Vous comprenez ce que contient chaque ressource, à qui elle s'adresse et ce qu'elle peut vous aider à faire." },
+  { icon: Lightbulb, number: "02", title: "Utilité", text: "Des contenus conçus autour de situations concrètes, avec des étapes et des exemples applicables." },
+  { icon: HeartHandshake, number: "03", title: "Confiance", text: "Des prix affichés clairement, de vraies informations et aucun faux avis client." },
+];
+
 export default function AboutPage() {
-  return <section className="container min-h-screen py-16 md:py-24"><p className="eyebrow">Pourquoi Veylan Store</p><h1 className="display-title mt-5 max-w-4xl">Le savoir n'a de valeur<br/>que lorsqu'il <em>vous fait avancer.</em></h1><div className="mt-12 grid gap-10 md:grid-cols-[1.1fr_.9fr]"><p className="text-lg leading-9 text-[var(--muted)]">Nous sélectionnons et créons des ressources numériques conçues pour être utiles dans la vraie vie : apprendre une compétence, structurer une idée et concrétiser un projet. Pas de promesses miracles. Des contenus clairs, des méthodes applicables et une progression à votre rythme.</p><div className="rounded-3xl bg-[#1d2b26] p-8 text-white md:p-10"><p className="eyebrow !text-[#d9bb8b]">Notre engagement</p><p className="mt-5 font-serif text-3xl leading-snug">Des ressources accessibles. Une approche concrète. Votre progression au centre.</p></div></div><div className="mt-16 grid gap-4 md:grid-cols-3">{[{icon:Compass,title:"Clarté",desc:"Chaque ressource doit répondre à un besoin identifiable."},{icon:Lightbulb,title:"Pratique",desc:"Des conseils et méthodes que vous pouvez réellement appliquer."},{icon:HeartHandshake,title:"Confiance",desc:"Des informations transparentes sur les contenus et les achats."}].map(({icon:Icon,title,desc})=><div key={title} className="rounded-2xl border border-[var(--line)] p-7"><Icon size={22}/><h2 className="mt-8 font-serif text-2xl">{title}</h2><p className="mt-3 text-sm leading-6 text-[var(--muted)]">{desc}</p></div>)}</div><Link href="/boutique" className="mt-12 inline-flex items-center gap-3 rounded-full bg-[#1d2b26] px-6 py-4 text-sm font-semibold text-white">Explorer les ressources <ArrowUpRight size={16}/></Link></section>;
+  return <>
+    <section className="about-hero">
+      <div className="container about-hero-inner">
+        <div className="about-copy">
+          <p className="about-kicker"><Sparkles size={14}/> QUI NOUS SOMMES</p>
+          <h1>Le prochain déclic<br/>peut commencer <em>ici.</em></h1>
+          <p>Veylan Store rassemble des ressources numériques pour celles et ceux qui veulent apprendre une compétence, lancer une idée ou faire avancer un projet.</p>
+          <div className="about-actions">
+            <Link href="/boutique" className="about-primary">Découvrir les ressources <ArrowUpRight size={17}/></Link>
+            <a href="#notre-approche" className="about-secondary">Notre approche <ArrowDownRight size={16}/></a>
+          </div>
+        </div>
+        <div className="about-visual" aria-label="Notre méthode : apprendre, appliquer, progresser">
+          <div className="about-visual-top"><span>LA MÉTHODE VEYLAN</span><span>01 — 03</span></div>
+          <div className="about-steps">
+            <div className="about-step about-step-one"><span>01</span><strong>Apprendre.</strong><small>Comprendre l'essentiel.</small></div>
+            <div className="about-step about-step-two"><span>02</span><strong>Appliquer.</strong><small>Passer à l'action.</small></div>
+            <div className="about-step about-step-three"><span>03</span><strong>Progresser.</strong><small>Construire la suite.</small></div>
+          </div>
+          <div className="about-visual-bottom">DU CONTENU UTILE. DES ACTIONS CONCRÈTES.</div>
+        </div>
+      </div>
+    </section>
+    <section id="notre-approche" className="container about-intro">
+      <div><p className="eyebrow">Notre raison d'être</p><h2>Pas juste accumuler<br/>des informations.<br/><em>Avancer pour de vrai.</em></h2></div>
+      <div className="about-intro-copy"><p>Internet ne manque pas de contenu. Ce qui manque souvent, c'est le bon guide au bon moment : une ressource claire, bien structurée, qui aide à savoir quoi faire ensuite.</p><p>C'est l'idée derrière Veylan Store. Proposer des ebooks, des formations et des outils numériques qui transforment l'apprentissage en action.</p><Link href="/boutique" className="about-inline-link">Trouver une ressource adaptée <ArrowUpRight size={16}/></Link></div>
+    </section>
+    <section className="about-values-wrap"><div className="container about-values">
+      <div className="about-values-heading"><p className="eyebrow">Ce que vous pouvez attendre de nous</p><h2>Trois engagements.<br/><em>Sans compromis.</em></h2></div>
+      <div className="about-value-grid">{values.map(({icon:Icon,number,title,text})=><article className="about-value" key={number}><div className="about-value-top"><span>{number}</span><Icon size={21}/></div><h3>{title}</h3><p>{text}</p></article>)}</div>
+    </div></section>
+    <section className="container about-final">
+      <div><p className="eyebrow">À vous de jouer</p><h2>Votre prochaine étape<br/><em>commence maintenant.</em></h2><p>Explorez la boutique et choisissez une ressource qui correspond à votre objectif du moment.</p></div>
+      <Link href="/boutique" className="about-primary">Explorer la boutique <ArrowUpRight size={17}/></Link>
+    </section>
+  </>;
 }
