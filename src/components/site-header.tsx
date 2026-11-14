@@ -1,43 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[#f8f7f4]/95 backdrop-blur">
-      <div className="container flex h-[76px] items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" aria-label="Veylan Store, accueil">
-          <span className="grid size-9 place-items-center rounded-full bg-[#1c2823] text-sm font-semibold text-[#e3c99c]">V</span>
-          <span className="text-[17px] font-semibold tracking-[-.04em]">veylan<span className="font-normal text-[#9a7a4e]"> store.</span></span>
-        </Link>
-
-        <nav className="hidden items-center gap-9 text-[13px] text-[#55574f] md:flex">
-          <Link className="transition hover:text-black" href="/#boutique">La boutique</Link>
-          <Link className="transition hover:text-black" href="/#categories">Catégories</Link>
-          <Link className="transition hover:text-black" href="/#apropos">À propos</Link>
-        </nav>
-
-        <div className="hidden items-center gap-4 md:flex">
-          <Link href="/#boutique" className="flex items-center gap-2 rounded-full bg-[#1c2823] px-5 py-3 text-xs font-semibold text-white transition hover:bg-[#34463d]">
-            <ShoppingBag size={14} /> Explorer la boutique <ArrowUpRight size={14} />
-          </Link>
-        </div>
-
-        <button className="grid size-10 place-items-center md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={menuOpen}>
-          {menuOpen ? <X size={21} /> : <Menu size={21} />}
-        </button>
-      </div>
-      {menuOpen && (
-        <nav className="container flex flex-col gap-4 border-t border-[var(--line)] py-5 text-sm md:hidden">
-          <Link onClick={() => setMenuOpen(false)} href="/#boutique">La boutique</Link>
-          <Link onClick={() => setMenuOpen(false)} href="/#categories">Catégories</Link>
-          <Link onClick={() => setMenuOpen(false)} href="/#apropos">À propos</Link>
-        </nav>
-      )}
-    </header>
-  );
+  const pathname = usePathname();
+  const links = [{href:"/boutique",label:"La boutique"},{href:"/categories",label:"Catégories"},{href:"/a-propos",label:"À propos"}];
+  return <header className="site-header">
+    <div className="site-header-inner">
+      <Link href="/" className="flex items-center gap-2" aria-label="Veylan Store, accueil"><span className="brand-mark">V</span><span className="brand-name">veylan<span className="font-normal text-[#9a7a4e]"> store.</span></span></Link>
+      <nav className="hidden items-center gap-9 md:flex">{links.map((link)=><Link key={link.href} className={pathname===link.href?"nav-link nav-link-active":"nav-link"} href={link.href}>{link.label}</Link>)}</nav>
+      <Link href="/boutique" className="header-cta hidden md:inline-flex"><ShoppingBag size={14}/> Explorer la boutique <ArrowUpRight size={14}/></Link>
+      <button className="grid size-10 place-items-center md:hidden" onClick={()=>setMenuOpen(!menuOpen)} aria-label={menuOpen?"Fermer le menu":"Ouvrir le menu"} aria-expanded={menuOpen}>{menuOpen?<X size={21}/>:<Menu size={21}/>}</button>
+    </div>
+    {menuOpen&&<nav className="container flex flex-col gap-5 border-t border-[var(--line)] py-5 text-sm md:hidden">{links.map((link)=><Link key={link.href} onClick={()=>setMenuOpen(false)} href={link.href}>{link.label}</Link>)}<Link onClick={()=>setMenuOpen(false)} href="/boutique" className="font-semibold text-[#9a7a4e]">Explorer la boutique ↗</Link></nav>}
+  </header>;
 }
