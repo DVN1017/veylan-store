@@ -7,8 +7,8 @@ import { products } from "@/lib/products";
 
 const filters = ["Tout", "Ebook", "Guide", "Formation", "Outil"];
 
-export function ShopExplorer() {
-  const [active, setActive] = useState("Tout");
+export function ShopExplorer({ initialCategory }: { initialCategory?: string }) {
+  const [active, setActive] = useState(filters.includes(initialCategory ?? "") ? initialCategory! : "Tout");
   const [query, setQuery] = useState("");
   const visible = useMemo(() => products.filter((product) => {
     const matchesCategory = active === "Tout" || product.category === active;
