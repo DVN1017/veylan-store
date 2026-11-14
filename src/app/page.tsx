@@ -5,9 +5,11 @@ import { ProductCard } from "@/components/product-card";
 import { TestimonialSection } from "@/components/testimonial-section";
 
 const categories = [
-  { n: "01", title: "Formations", sub: "Apprendre une compétence", href: "/boutique?type=Formation", mark: "↗", tone: "mint" },
-  { n: "02", title: "Ebooks & guides", sub: "Comprendre, puis appliquer", href: "/boutique?type=Ebook", mark: "↗", tone: "sand" },
-  { n: "03", title: "Outils pratiques", sub: "Gagner du temps au quotidien", href: "/boutique?type=Outil", mark: "↗", tone: "lilac" },
+  { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/categories#formations", tone: "acid", tag: "LEARN" },
+  { n: "02", title: "Intelligence artificielle", sub: "De zéro à vos premiers projets IA", href: "/categories#ia", tone: "blue", tag: "DISCOVER" },
+  { n: "03", title: "Coaching 1:1", sub: "Un accompagnement adapté à votre objectif", href: "/categories#coaching", tone: "violet", tag: "LEVEL UP" },
+  { n: "04", title: "Ebooks & guides", sub: "Des méthodes à lire et appliquer", href: "/categories#ebooks", tone: "orange", tag: "READ" },
+  { n: "05", title: "Outils & templates", sub: "Des ressources pour passer à l'action", href: "/categories#outils", tone: "steel", tag: "CREATE" },
 ];
 
 export default function HomePage() {
@@ -50,8 +52,8 @@ export default function HomePage() {
 
     <section className="category-section">
       <div className="container">
-        <div className="section-heading premium-section-heading"><div><p className="eyebrow">Explorez par univers</p><h2 className="section-title">Quel est votre<br/><em>prochain objectif ?</em></h2></div><p className="section-aside">Une compétence à développer, une idée à lancer, une méthode à trouver. Commencez par ce qui compte pour vous.</p></div>
-        <div className="category-feature-grid">{categories.map((c)=><Link key={c.n} href={c.href} className={"category-feature "+c.tone}><span className="category-feature-n">{c.n} / VEYLAN</span><span className="category-feature-arrow"><ArrowUpRight size={20}/></span><div><small>{c.sub}</small><h3>{c.title}</h3></div></Link>)}</div>
+        <div className="section-heading premium-section-heading"><div><p className="eyebrow">Explorez par univers</p><h2 className="section-title">Explorez tout ce que<br/><em>vous pouvez devenir.</em></h2></div><p className="section-aside">Formations, coaching individuel, intelligence artificielle, ebooks et outils : choisissez votre prochain terrain de progression.</p></div>
+        <div className="category-feature-grid premium-universe-grid">{categories.map((c)=><Link key={c.n} href={c.href} className={"category-feature universe-card "+c.tone}><div className="universe-card-top"><span className="category-feature-n">{c.n} / VEYLAN</span><span className="universe-tag">{c.tag}</span></div><span className="category-feature-arrow"><ArrowUpRight size={20}/></span><div className="universe-card-copy"><small>{c.sub}</small><h3>{c.title}</h3></div><span className="universe-card-watermark">{c.n}</span></Link>)}</div>
       </div>
     </section>
 
