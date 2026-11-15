@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, GraduationCap, Sparkles, Zap } from "lucide-react";
 import { products } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
-import { TestimonialSection } from "@/components/testimonial-section";
 
 const categories = [
   { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/boutique?type=Formation", tone: "acid", tag: "LEARN" },
@@ -64,7 +63,6 @@ export default function HomePage() {
 
     <section className="editorial-band"><div className="container editorial-band-grid"><div><p className="eyebrow !text-[#d9bd91]">La différence Veylan</p><h2>Le déclic ne suffit pas.<br/><em>Il faut passer à l&apos;action.</em></h2></div><div><p>Nous croyons aux contenus qui débloquent une situation, donnent une méthode et aident à construire quelque chose de concret. Pas aux promesses magiques. À la progression réelle.</p><Link href="/a-propos" className="editorial-link">Découvrir notre approche <ArrowUpRight size={17}/></Link></div></div><div className="editorial-watermark">MAKE IT<br/>HAPPEN.</div></section>
 
-    <TestimonialSection/>
     <section className="container final-cta premium-final"><div><p className="eyebrow">Votre prochaine étape commence ici</p><h2 className="section-title">Une idée en tête ?<br/><em>Faisons-la avancer.</em></h2><p className="final-cta-copy">Explorez les ressources et choisissez celle qui correspond à votre ambition du moment.</p></div><Link href="/boutique" className="premium-button">Explorer Veylan Store <ArrowUpRight size={18}/></Link></section>
   </>;
 }
