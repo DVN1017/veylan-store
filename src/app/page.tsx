@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, GraduationCap, Sparkles, Zap } from "lucide-react";
 import { products } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
+import { FeaturedOffers } from "@/components/featured-offers";
 
 const categories = [
   { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/boutique?type=Formation", tone: "acid", tag: "LEARN" },
@@ -55,6 +56,8 @@ export default function HomePage() {
         <div className="category-feature-grid premium-universe-grid">{categories.map((c)=><Link key={c.n} href={c.href} className={"category-feature universe-card "+c.tone}><div className="universe-card-top"><span className="category-feature-n">{c.n} / VEYLAN</span><span className="universe-tag">{c.tag}</span></div><span className="category-feature-arrow"><ArrowUpRight size={20}/></span><div className="universe-card-copy"><small>{c.sub}</small><h3>{c.title}</h3></div><span className="universe-card-watermark">{c.n}</span></Link>)}</div>
       </div>
     </section>
+
+    <FeaturedOffers />
 
     <section id="selection" className="container home-products premium-products">
       <div className="section-heading premium-section-heading"><div><p className="eyebrow">La sélection Veylan</p><h2 className="section-title">Des ressources pour<br/><em>passer à l&apos;étape suivante.</em></h2></div><Link href="/boutique" className="text-link">Voir toute la boutique <ArrowUpRight size={16}/></Link></div>
