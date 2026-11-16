@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowDown, ArrowUpRight, Check, Clock3, Sparkles, Target, BookOpenCheck, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowDown, Clock3, Sparkles, Target, BookOpenCheck, ShieldCheck } from "lucide-react";
 import type { Offer } from "@/lib/offers";
 import { formatOfferPrice } from "@/lib/offers";
 export function OfferLanding({offer}:{offer:Offer}){
