@@ -1,30 +1,32 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search, SlidersHorizontal, X } from "lucide-react";
-import { ProductCard } from "@/components/product-card";
-import { products } from "@/lib/products";
-
-const filters = ["Tout", "Ebook", "Guide", "Formation", "Outil"];
+import { Search, X } from "lucide-react";
+import Link from "next/link";
+import { offers, formatOfferPrice } from "@/lib/offers";
 
 export function ShopExplorer({ initialCategory }: { initialCategory?: string }) {
-  const [active, setActive] = useState(filters.includes(initialCategory ?? "") ? initialCategory! : "Tout");
   const [query, setQuery] = useState("");
-  const visible = useMemo(() => products.filter((product) => {
-    const matchesCategory = active === "Tout" || product.category === active;
+  const [active, setActive] = useState(initialCategory && initialCategory !== "Formation" ? "Aucun résultat" : "Tout");
+  const visible = useMemo(() => offers.filter((offer) => {
     const term = query.trim().toLocaleLowerCase("fr");
-    const matchesQuery = !term || (product.title + " " + product.description + " " + product.category).toLocaleLowerCase("fr").includes(term);
-    return matchesCategory && matchesQuery;
+    return active !== "Aucun résultat" && (!term || (offer.title + " " + offer.description + " " + offer.tagline).toLocaleLowerCase("fr").includes(term));
   }), [active, query]);
 
   return <div>
     <div className="shop-toolbar">
       <div className="shop-tabs" aria-label="Filtrer par catégorie">
-        {filters.map((filter) => <button key={filter} onClick={() => setActive(filter)} className={active === filter ? "shop-tab shop-tab-active" : "shop-tab"} aria-pressed={active === filter}>{filter}</button>)}
+        <button onClick={() => setActive("Tout")} className={active === "Tout" ? "shop-tab shop-tab-active" : "shop-tab"} aria-pressed={active === "Tout"}>Toutes les offres</button>
+        <button onClick={() => setActive("Aucun résultat")} className={active === "Aucun résultat" ? "shop-tab shop-tab-active" : "shop-tab"} aria-pressed={active === "Aucun résultat"}>Autres catégories</button>
       </div>
-      <label className="shop-search"><Search size={17}/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Rechercher une ressource..." aria-label="Rechercher un produit"/>{query && <button onClick={() => setQuery("")} aria-label="Effacer"><X size={16}/></button>}</label>
+      <label className="shop-search"><Search size={17}/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Rechercher une formation..." aria-label="Rechercher une formation"/>{query && <button onClick={() => setQuery("")} aria-label="Effacer"><X size={16}/></button>}</label>
     </div>
-    <div className="mb-6 flex items-center justify-between text-xs text-[var(--muted)]"><span>{visible.length} ressource(s)</span><span className="inline-flex items-center gap-2"><SlidersHorizontal size={14}/> Sélection Veylan</span></div>
-    {visible.length ? <div className="grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">{visible.map((product) => <ProductCard key={product.id} product={product}/>)}</div> : <div className="rounded-2xl border border-dashed border-[var(--line)] px-6 py-20 text-center"><p className="font-serif text-2xl">Aucun résultat pour cette recherche.</p><button onClick={() => {setQuery("");setActive("Tout");}} className="mt-4 text-sm font-semibold">Réinitialiser les filtres</button></div>}
+    <div className="mb-6 flex items-center justify-between text-xs text-[var(--muted)]"><span>{visible.length} formation(s)</span><span>Sélection Veylan Academy</span></div>
+    {visible.length ? <div className="offer-grid">{visible.map((offer) => <article key={offer.slug} className={"offer-card offer-" + offer.accent}>
+      <div className="offer-card-top"><span>{offer.number} / VEYLAN ACADEMY</span><span aria-hidden="true">✦</span></div>
+      <div className="offer-card-main"><span className="offer-eyebrow">{offer.eyebrow}</span><h3>{offer.title}</h3><p>{offer.tagline}</p></div>
+      <div className="offer-card-bottom"><strong>{formatOfferPrice(offer.price)}</strong><Link href={"/formations/" + offer.slug}>Découvrir le programme ↗</Link></div>
+      <span className="offer-card-watermark">{offer.number}</span>
+    </article>)}</div> : <div className="rounded-2xl border border-dashed border-[var(--line)] px-6 py-20 text-center"><p className="font-serif text-2xl">Aucune formation trouvée.</p><button onClick={() => {setQuery("");setActive("Tout");}} className="mt-4 text-sm font-semibold">Voir toutes les formations</button></div>}
   </div>;
 }
