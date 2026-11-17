@@ -14,50 +14,46 @@ export type Product = {
   checkoutUrl?: string;
 };
 
+/**
+ * Catalogue Veylan Store : les anciennes fiches ont été remplacées
+ * par les trois parcours Veylan Academy.
+ */
 export const products: Product[] = [
   {
-    id: "prod-001",
-    slug: "maitriser-le-digital",
-    title: "Maîtriser le digital",
-    description: "Un parcours pratique pour structurer votre présence et développer vos compétences numériques.",
-    category: "Guide",
+    id: "academy-001",
+    slug: "ai-productivity-mastery",
+    title: "AI Productivity Mastery",
+    description: "Apprenez à utiliser l'intelligence artificielle pour gagner du temps, mieux organiser vos idées et produire des résultats concrets.",
+    category: "Formation",
     price: 7500,
     currency: "XOF",
     badge: "Nouveau",
-    cover: "linear-gradient(145deg, #1f302c, #63786a)",
+    cover: "linear-gradient(145deg, #153b42, #5ec5c8)",
     featured: true,
   },
   {
-    id: "prod-002",
-    slug: "creer-son-premier-site",
-    title: "Créer son premier site web",
-    description: "Les bases pour passer de l'idée à un site web clair et professionnel.",
+    id: "academy-002",
+    slug: "business-sales-system",
+    title: "Business Sales System",
+    description: "Structurez vos offres, prospectez, suivez vos clients et pilotez vos ventes avec une méthode simple.",
     category: "Formation",
-    price: 15000,
+    price: 9900,
     currency: "XOF",
-    cover: "linear-gradient(145deg, #27344c, #8295b2)",
+    badge: "Nouveau",
+    cover: "linear-gradient(145deg, #30234f, #9b7ce0)",
     featured: true,
   },
   {
-    id: "prod-003",
-    slug: "guide-productivite",
-    title: "Le guide de la productivité",
-    description: "Des méthodes simples pour mieux organiser son temps et avancer avec régularité.",
-    category: "Ebook",
-    price: 5000,
+    id: "academy-003",
+    slug: "ai-creator-studio",
+    title: "AI Creator Studio",
+    description: "Concevez des visuels, vidéos courtes et publicités avec un workflow créatif assisté par l'intelligence artificielle.",
+    category: "Formation",
+    price: 9900,
     currency: "XOF",
-    cover: "linear-gradient(145deg, #6c493b, #c89b73)",
+    badge: "Nouveau",
+    cover: "linear-gradient(145deg, #54331e, #e6a34b)",
     featured: true,
-  },
-  {
-    id: "prod-004",
-    slug: "kit-createur-digital",
-    title: "Kit du créateur digital",
-    description: "Des modèles et ressources pour lancer vos premières offres numériques.",
-    category: "Outil",
-    price: 10000,
-    currency: "XOF",
-    cover: "linear-gradient(145deg, #45385e, #9886b5)",
   },
 ];
 
