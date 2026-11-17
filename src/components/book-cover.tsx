@@ -2,10 +2,9 @@ import type { Product } from "@/lib/products";
 import { Sparkles } from "lucide-react";
 
 const palettes: Record<string, { bg: string; ink: string; accent: string; mark: string }> = {
-  "maitriser-le-digital": { bg: "#e9d8bd", ink: "#172a25", accent: "#a65e3d", mark: "01" },
-  "creer-son-premier-site": { bg: "#dce5f0", ink: "#17243a", accent: "#4775a4", mark: "02" },
-  "guide-productivite": { bg: "#ead9d1", ink: "#4a2d2a", accent: "#b36b52", mark: "03" },
-  "kit-createur-digital": { bg: "#e5dff0", ink: "#342746", accent: "#8165a8", mark: "04" },
+  "ai-productivity-mastery": { bg: "#d7eeee", ink: "#153b42", accent: "#2699a1", mark: "01" },
+  "business-sales-system": { bg: "#e4def2", ink: "#30234f", accent: "#8065b7", mark: "02" },
+  "ai-creator-studio": { bg: "#f0dfcc", ink: "#54331e", accent: "#c47c38", mark: "03" },
 };
 
 export function BookCover({ product, compact = false }: { product: Product; compact?: boolean }) {

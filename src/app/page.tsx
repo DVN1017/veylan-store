@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, GraduationCap, Sparkles, Zap } from "lucide-react";
-import { products } from "@/lib/products";
-import { ProductCard } from "@/components/product-card";
+import { FeaturedOffers } from "@/components/featured-offers";
 
 const categories = [
   { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/boutique?type=Formation", tone: "acid", tag: "LEARN" },
@@ -12,7 +11,6 @@ const categories = [
 ];
 
 export default function HomePage() {
-  const featured = products.filter((p) => p.featured);
   return <>
     <section className="premium-hero">
       <div className="hero-grain" aria-hidden="true"/>
@@ -56,10 +54,9 @@ export default function HomePage() {
       </div>
     </section>
 
-    <section id="selection" className="container home-products premium-products">
-      <div className="section-heading premium-section-heading"><div><p className="eyebrow">La sélection Veylan</p><h2 className="section-title">Des ressources pour<br/><em>passer à l&apos;étape suivante.</em></h2></div><Link href="/boutique" className="text-link">Voir toute la boutique <ArrowUpRight size={16}/></Link></div>
-      <div className="grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">{featured.map((product)=><ProductCard key={product.id} product={product}/>)}</div>
-    </section>
+    <FeaturedOffers />
+
+
 
     <section className="editorial-band"><div className="container editorial-band-grid"><div><p className="eyebrow !text-[#d9bd91]">La différence Veylan</p><h2>Le déclic ne suffit pas.<br/><em>Il faut passer à l&apos;action.</em></h2></div><div><p>Nous croyons aux contenus qui débloquent une situation, donnent une méthode et aident à construire quelque chose de concret. Pas aux promesses magiques. À la progression réelle.</p><Link href="/a-propos" className="editorial-link">Découvrir notre approche <ArrowUpRight size={17}/></Link></div></div><div className="editorial-watermark">MAKE IT<br/>HAPPEN.</div></section>
 

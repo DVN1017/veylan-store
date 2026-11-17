@@ -1,0 +1,2 @@
+import { OfferGrid } from "@/components/offer-grid";
+export function FeaturedOffers(){return <section className="featured-offers"><div className="container"><div className="featured-offers-heading"><div><p className="eyebrow">VEYLAN ACADEMY / NOS FORMATIONS</p><h2>Trois chemins.<br/><em>Un prochain niveau.</em></h2></div><p>Des parcours conçus pour apprendre, développer une activité ou créer du contenu avec les bons outils.</p></div><OfferGrid/></div></section>;}
