@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, BrainCircuit, GraduationCap, MessageCircle, Wrench } from "lucide-react";
@@ -11,8 +12,5 @@ const categories = [
  { id:"outils", title:"Outils & templates", desc:"Des modèles et supports pratiques pour gagner du temps et mieux exécuter vos idées.", label:"CRÉER · CONSTRUIRE", icon:Wrench, color:"steel", number:"05", href:"/boutique?type=Outil" },
 ];
 export default function CategoriesPage() {
- return <main className="universe-page">
-  <section className="universe-page-hero"><div className="container"><p className="eyebrow">VEYLAN / LES POSSIBLES SONT OUVERTS</p><h1>Choose your next<br/><em>level.</em></h1><p>Apprendre une nouvelle compétence. Comprendre l'intelligence artificielle. Faire avancer un projet avec un coach. Trouvez votre prochaine étape.</p><div className="universe-hero-meta"><span>5 UNIVERS À EXPLORER</span><span>LEARN / BUILD / EVOLVE</span></div></div></section>
-  <section className="container universe-page-grid">{categories.map(({id,title,desc,label,icon:Icon,color,number,href})=><article id={id} key={id} className={"universe-detail-card "+color}><div className="universe-detail-top"><span>{number} / VEYLAN</span><Icon size={26} strokeWidth={1.5}/></div><div className="universe-detail-content"><span>{label}</span><h2>{title}</h2><p>{desc}</p><Link href={href} className="universe-detail-link">Explorer les ressources <ArrowUpRight size={17}/></Link></div><span className="universe-detail-mark">{number}</span></article>)}</section>
- </main>;
+ return <main className="universe-page"><section className="universe-page-hero"><div className="container"><p className="eyebrow">VEYLAN / LES POSSIBLES SONT OUVERTS</p><h1>Choose your next<br/><em>level.</em></h1><p>Apprendre une nouvelle compétence. Comprendre l'intelligence artificielle. Faire avancer un projet avec un coach. Trouvez votre prochaine étape.</p><div className="universe-hero-meta"><span>5 UNIVERS À EXPLORER</span><span>LEARN / BUILD / EVOLVE</span></div></div></section><section className="container universe-page-grid">{categories.map(({id,title,desc,label,icon:Icon,color,number,href})=><article id={id} key={id} className={"universe-detail-card "+color}><div className="universe-detail-top"><span>{number} / VEYLAN</span><Icon size={26} strokeWidth={1.5}/></div><div className="universe-detail-content"><span>{label}</span><h2>{title}</h2><p>{desc}</p><Link href={href} className="universe-detail-link">Explorer les ressources <ArrowUpRight size={17}/></Link></div><span className="universe-detail-mark">{number}</span></article>)}</section></main>;
 }
