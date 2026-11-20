@@ -1,68 +1,33 @@
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, GraduationCap, Sparkles, Zap } from "lucide-react";
+import { ArrowUpRight, BookOpen, Feather, GraduationCap, Lightbulb } from "lucide-react";
 import { products } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
+import { LibraryExperience } from "@/components/library-experience";
 
 const categories = [
-  { n: "01", title: "Formations", sub: "Développez des compétences concrètes", href: "/boutique?type=Formation", tone: "acid", tag: "LEARN" },
-  { n: "02", title: "Intelligence artificielle", sub: "De zéro à vos premiers projets IA", href: "/categories#ia", tone: "blue", tag: "DISCOVER" },
-  { n: "03", title: "Coaching 1:1", sub: "Un accompagnement adapté à votre objectif", href: "/categories#coaching", tone: "violet", tag: "LEVEL UP" },
-  { n: "04", title: "Ebooks & guides", sub: "Des méthodes à lire et appliquer", href: "/boutique?type=Ebook", tone: "orange", tag: "READ" },
-  { n: "05", title: "Outils & templates", sub: "Des ressources pour passer à l'action", href: "/boutique?type=Outil", tone: "steel", tag: "CREATE" },
+  { title: "Formations", text: "Des parcours structurés pour acquérir de nouvelles compétences.", href: "/boutique?type=Formation", icon: GraduationCap },
+  { title: "Intelligence artificielle", text: "Comprendre l'IA et apprendre à l'utiliser dans vos projets.", href: "/boutique?type=Formation", icon: Lightbulb },
+  { title: "Ebooks & guides", text: "Des ouvrages pratiques à consulter et à appliquer à votre rythme.", href: "/boutique?type=Ebook", icon: BookOpen },
 ];
 
 export default function HomePage() {
-  const featured = products.filter((p) => p.featured);
+  const featured = products.filter((product) => product.featured);
+  const libraryBooks = featured.slice(0, 3);
   return <>
-    <section className="premium-hero">
-      <div className="hero-grain" aria-hidden="true"/>
-      <div className="container premium-hero-grid">
-        <div className="premium-hero-copy">
-          <div className="eyebrow-pill"><span className="live-dot"/> LE SAVOIR QUI FAIT BOUGER LES CHOSES</div>
-          <h1>Apprenez.<br/><span>Créez.</span><br/><em>Allez plus loin.</em></h1>
-          <p className="premium-lead">Les bonnes ressources peuvent changer la suite. Découvrez des formations, ebooks et outils conçus pour transformer vos idées en actions concrètes.</p>
-          <div className="premium-hero-actions">
-            <Link href="/boutique" className="premium-button">Trouver ma prochaine ressource <ArrowUpRight size={18}/></Link>
-            <Link href="/a-propos" className="premium-text-link">L&apos;esprit Veylan <ArrowRight size={16}/></Link>
-          </div>
-          <div className="hero-micro-proof"><span><Check size={14}/> Des contenus utiles</span><span><Check size={14}/> À votre rythme</span><span><Check size={14}/> 100% numérique</span></div>
-        </div>
-        <div className="premium-visual" aria-label="Aperçu de ressources numériques Veylan">
-          <div className="visual-orbit orbit-a"/><div className="visual-orbit orbit-b"/>
-          <div className="visual-index"><span>VEYLAN / LEARNING GOODS</span><span>ÉDITION 2026</span></div>
-          <div className="visual-stack">
-            <div className="visual-card visual-card-back"><span>WORKBOOK / 02</span><div className="back-lines"><i/><i/><i/><i/></div><b>BUILD<br/>YOUR<br/>NEXT.</b></div>
-            <div className="visual-card visual-card-front"><div className="cover-top"><span>V / ÉDITIONS</span><Sparkles size={17}/></div><div className="cover-art"><div className="cover-ring"/><div className="cover-disc"/></div><div className="cover-title"><small>LE GUIDE POUR PASSER À L&apos;ACTION</small><strong>Maîtriser<br/>le digital.</strong></div><div className="cover-foot"><span>APPRENDRE · CRÉER · ÉVOLUER</span><span>01</span></div></div>
-          </div>
-          <div className="floating-label label-top"><span className="floating-icon"><GraduationCap size={17}/></span><span><b>Apprendre autrement</b><small>Le savoir devient action.</small></span></div>
-          <div className="floating-label label-bottom"><span className="floating-icon"><Zap size={17}/></span><span><b>Votre prochain déclic</b><small>Commence peut-être ici.</small></span><ArrowUpRight size={16}/></div>
-          <div className="visual-side-note">LEARN<br/>MAKE<br/>MATTER.</div>
-        </div>
-      </div>
-      <div className="container hero-bottom premium-bottom"><span>01 — APPRENDRE AVEC INTENTION</span><span>02 — CRÉER AVEC MÉTHODE</span><span>03 — ÉVOLUER AVEC CONFIANCE</span><a href="#selection" aria-label="Défiler vers la sélection"><ArrowDown size={16}/></a></div>
+    <LibraryExperience books={libraryBooks} />
+    <section className="library-introduction">
+      <p className="library-overline">UNE MAISON POUR LES IDÉES</p>
+      <h2>Le plaisir de découvrir.<br /><em>La liberté d'apprendre.</em></h2>
+      <p>Veylan Digital réunit des ressources numériques pensées avec soin : des ouvrages pour comprendre, des formations pour progresser et des outils pour entreprendre.</p>
     </section>
-
-    <section className="container value-ribbon">
-      <div className="value-ribbon-intro"><span className="eyebrow">L&apos;EXPÉRIENCE VEYLAN</span><strong>Pas plus de contenu.<br/><em>Le bon contenu.</em></strong></div>
-      <div className="value-point"><span className="value-number">01</span><div><b>Clair dès le départ</b><small>Vous savez ce que vous allez apprendre.</small></div></div>
-      <div className="value-point"><span className="value-number">02</span><div><b>Conçu pour agir</b><small>Des idées à mettre en pratique.</small></div></div>
-      <div className="value-point"><span className="value-number">03</span><div><b>À votre rythme</b><small>Apprenez où et quand vous voulez.</small></div></div>
+    <section className="library-categories">
+      <div className="library-section-heading"><span>01 / LES RAYONS</span><h2>Explorez nos collections</h2></div>
+      <div className="library-category-grid">{categories.map(({ title, text, href, icon: Icon }) => <Link href={href} className="library-category" key={title}><Icon size={24} /><span>{title}</span><p>{text}</p><ArrowUpRight size={17} /></Link>)}</div>
     </section>
-
-    <section className="category-section">
-      <div className="container">
-        <div className="section-heading premium-section-heading"><div><p className="eyebrow">Explorez par univers</p><h2 className="section-title">Explorez tout ce que<br/><em>vous pouvez devenir.</em></h2></div><p className="section-aside">Formations, coaching individuel, intelligence artificielle, ebooks et outils : choisissez votre prochain terrain de progression.</p></div>
-        <div className="category-feature-grid premium-universe-grid">{categories.map((c)=><Link key={c.n} href={c.href} className={"category-feature universe-card "+c.tone}><div className="universe-card-top"><span className="category-feature-n">{c.n} / VEYLAN</span><span className="universe-tag">{c.tag}</span></div><span className="category-feature-arrow"><ArrowUpRight size={20}/></span><div className="universe-card-copy"><small>{c.sub}</small><h3>{c.title}</h3></div><span className="universe-card-watermark">{c.n}</span></Link>)}</div>
-      </div>
+    <section className="library-featured">
+      <div className="library-section-heading"><span>02 / À DÉCOUVRIR</span><h2>Quelques ouvrages choisis</h2></div>
+      <div className="grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">{featured.map((product) => <ProductCard key={product.id} product={product} />)}</div>
     </section>
-
-    <section id="selection" className="container home-products premium-products">
-      <div className="section-heading premium-section-heading"><div><p className="eyebrow">La sélection Veylan</p><h2 className="section-title">Des ressources pour<br/><em>passer à l&apos;étape suivante.</em></h2></div><Link href="/boutique" className="text-link">Voir toute la boutique <ArrowUpRight size={16}/></Link></div>
-      <div className="grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">{featured.map((product)=><ProductCard key={product.id} product={product}/>)}</div>
-    </section>
-
-    <section className="editorial-band"><div className="container editorial-band-grid"><div><p className="eyebrow !text-[#d9bd91]">La différence Veylan</p><h2>Le déclic ne suffit pas.<br/><em>Il faut passer à l&apos;action.</em></h2></div><div><p>Nous croyons aux contenus qui débloquent une situation, donnent une méthode et aident à construire quelque chose de concret. Pas aux promesses magiques. À la progression réelle.</p><Link href="/a-propos" className="editorial-link">Découvrir notre approche <ArrowUpRight size={17}/></Link></div></div><div className="editorial-watermark">MAKE IT<br/>HAPPEN.</div></section>
-
-    <section className="container final-cta premium-final"><div><p className="eyebrow">Votre prochaine étape commence ici</p><h2 className="section-title">Une idée en tête ?<br/><em>Faisons-la avancer.</em></h2><p className="final-cta-copy">Explorez les ressources et choisissez celle qui correspond à votre ambition du moment.</p></div><Link href="/boutique" className="premium-button">Explorer Veylan Store <ArrowUpRight size={18}/></Link></section>
+    <section className="library-last-word"><Feather size={24} /><p>« Un livre est une porte ouverte sur un autre monde. »</p><span>VEYLAN DIGITAL · ÉDITIONS</span></section>
   </>;
 }
