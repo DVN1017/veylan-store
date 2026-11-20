@@ -8,7 +8,12 @@ import { formatPrice } from "@/lib/products";
 
 export function LibraryExperience({ books }: { books: Product[] }) {
   const safeBooks = books.slice(0, 3);
-  useEffect(() => {\n    document.body.classList.add("immersive-home");\n    return () => document.body.classList.remove("immersive-home");\n  }, []);\n\n  const [active, setActive] = useState(0);
+  useEffect(() => {
+    document.body.classList.add("immersive-home");
+    return () => document.body.classList.remove("immersive-home");
+  }, []);
+
+  const [active, setActive] = useState(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const current = safeBooks[active];
 
