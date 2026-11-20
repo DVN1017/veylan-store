@@ -16,7 +16,7 @@ export function LibraryExperience({ books }: { books: Product[] }) {
     <div className="library-atmosphere" aria-hidden="true" />
     <div className="library-topline"><span>VEYLAN DIGITAL <i /> BIBLIOTHÈQUE PRIVÉE</span><span>COLLECTION · 2026</span></div>
 
-    {!opened ? <div className="library-closed-scene">
+    <div className="library-closed-scene">
       <div className="library-intro">
         <p className="library-overline">LE SAVOIR PREND UNE AUTRE DIMENSION</p>
         <h1>Une bibliothèque<br /><em>à explorer.</em></h1>
@@ -40,7 +40,7 @@ export function LibraryExperience({ books }: { books: Product[] }) {
         </div>
         <div className="library-floor-shadow" />
       </div>
-    </div> : <div className="library-open-scene">
+    </div>\n    {opened && <div className="library-open-scene">
       <div className="library-open-heading">
         <p className="library-overline">LES ÉDITIONS VEYLAN · SÉLECTION DU MOMENT</p>
         <h2>Choisissez votre<br /><em>prochaine lecture.</em></h2>
