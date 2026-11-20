@@ -2,81 +2,105 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { formatPrice } from "@/lib/products";
 
 export function LibraryExperience({ books }: { books: Product[] }) {
-  const [opened, setOpened] = useState(false);
+  const safeBooks = books.slice(0, 3);
   const [active, setActive] = useState(0);
-  const current = books[active];
-  const move = (direction: number) => setActive((index) => (index + direction + books.length) % books.length);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const current = safeBooks[active];
 
-  return <section className={opened ? "library-experience library-open" : "library-experience"}>
-    <div className="library-atmosphere" aria-hidden="true" />
-    <div className="library-topline"><span>VEYLAN DIGITAL <i /> BIBLIOTHÈQUE PRIVÉE</span><span>COLLECTION · 2026</span></div>
+  if (!current) return null;
 
-    <div className="library-closed-scene">
-      <div className="library-intro">
-        <p className="library-overline">LE SAVOIR PREND UNE AUTRE DIMENSION</p>
-        <h1>Une bibliothèque<br /><em>à explorer.</em></h1>
-        <p className="library-description">Des livres, des méthodes et des idées soigneusement réunis pour nourrir votre curiosité et faire grandir vos projets.</p>
-        <button className="library-discover" onClick={() => setOpened(true)}>Découvrir <BookOpen size={17} /></button>
-        <span className="library-hint">POUSSEZ LES PORTES. COMMENCEZ À EXPLORER.</span>
+  const move = (step: number) => {
+    setActive((index) => (index + step + safeBooks.length) % safeBooks.length);
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    setTilt({
+      x: ((event.clientY - rect.top) / rect.height - 0.5) * -9,
+      y: ((event.clientX - rect.left) / rect.width - 0.5) * 12,
+    });
+  };
+
+  return (
+    <section className="knowledge-world" aria-label="Bibliothèque immersive Veylan">
+      <div className="knowledge-architecture" aria-hidden="true">
+        <div className="library-dome" />
+        <div className="library-shelves library-shelves-left" />
+        <div className="library-shelves library-shelves-right" />
+        <div className="library-floor" />
+        <div className="library-light-beam" />
+        <div className="library-stars"><i /><i /><i /><i /><i /><i /><i /><i /></div>
       </div>
-      <div className="library-cabinet-wrap" aria-label="Bibliothèque ancienne à deux portes">
-        <div className="library-cabinet">
-          <div className="cabinet-crown" /><div className="cabinet-top-shadow" />
-          <div className="cabinet-inner">
-            <div className="cabinet-back">
-              <div className="cabinet-shelf cabinet-shelf-one"><span /><span /><span /><span /><span /><span /></div>
-              <div className="cabinet-shelf cabinet-shelf-two"><span /><span /><span /><span /><span /></div>
-              <div className="cabinet-shelf cabinet-shelf-three"><span /><span /><span /><span /><span /><span /></div>
-            </div>
-            <div className="cabinet-door cabinet-door-left"><div className="door-panel door-panel-top" /><div className="door-panel door-panel-bottom" /><i className="door-handle" /></div>
-            <div className="cabinet-door cabinet-door-right"><div className="door-panel door-panel-top" /><div className="door-panel door-panel-bottom" /><i className="door-handle" /></div>
+
+      <header className="knowledge-nav">
+        <Link href="/" className="knowledge-brand"><span className="brand-symbol">V</span><span>VEYLAN <b>STORE</b></span></Link>
+        <span className="knowledge-nav-center"><i /> LA BIBLIOTHÈQUE DU SAVOIR</span>
+        <Link href="/boutique" className="knowledge-nav-link">Explorer la boutique <ArrowUpRight size={15} /></Link>
+      </header>
+
+      <div className="knowledge-hero">
+        <div className="knowledge-copy">
+          <span className="knowledge-eyebrow"><Sparkles size={13} /> APPRENDRE · COMPRENDRE · CRÉER</span>
+          <h1>Le savoir<br />en <em>mouvement.</em></h1>
+          <p>Des livres et des formations pour transformer vos idées en compétences concrètes.</p>
+          <a className="knowledge-explore" href="#collection">Explorer la collection <ArrowDown size={16} /></a>
+          <div className="knowledge-proof"><span>01 — DES RESSOURCES SÉLECTIONNÉES</span><span>02 — UN SAVOIR À PORTÉE DE MAIN</span></div>
+        </div>
+
+        <div className="holo-stage" onPointerMove={onPointerMove} onPointerLeave={() => setTilt({ x: 0, y: 0 })}>
+          <div className="holo-orbit holo-orbit-one" /><div className="holo-orbit holo-orbit-two" />
+          <div className="holo-platform"><span /><i /><b /></div>
+          <div className="holo-glass holo-glass-top" /><div className="holo-glass holo-glass-bottom" />
+          <div className="holo-beam" />
+          <div className="holo-book-row">
+            {safeBooks.map((book, index) => {
+              const offset = (index - active + safeBooks.length) % safeBooks.length;
+              const position = offset === 0 ? "holo-book-main" : offset === 1 ? "holo-book-next" : "holo-book-prev";
+              return (
+                <button key={book.id} type="button" className={`holo-book ${position}`} onClick={() => { setActive(index); setTilt({ x: 0, y: 0 }); }} aria-label={`Voir ${book.title}`} aria-pressed={index === active}>
+                  <span className="holo-book-object" style={{ transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y + (index === active ? -8 : 0)}deg)` }}>
+                    <span className="holo-book-spine" />
+                    <span className="holo-book-cover">
+                      <span className="holo-cover-brand">VEYLAN <i>✦</i></span>
+                      <span className="holo-cover-art"><i /><b /><em /></span>
+                      <strong>{book.title}</strong>
+                      <small>{book.category === "Formation" ? "FORMATION PRATIQUE" : "GUIDE NUMÉRIQUE"}</small>
+                      <span className="holo-cover-foot">ÉDITIONS VEYLAN</span>
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
-          <div className="cabinet-base" /><div className="cabinet-feet"><i /><i /></div>
+          <div className="holo-caption"><span>HOLO / {String(active + 1).padStart(2, "0")}</span><i /> <span>COLLECTION VEYLAN</span></div>
+          <div className="holo-controls">
+            <button type="button" onClick={() => move(-1)} aria-label="Livre précédent"><ArrowLeft size={17} /></button>
+            <span>{String(active + 1).padStart(2, "0")} <i>/</i> {String(safeBooks.length).padStart(2, "0")}</span>
+            <button type="button" onClick={() => move(1)} aria-label="Livre suivant"><ArrowRight size={17} /></button>
+          </div>
         </div>
-        <div className="library-floor-shadow" />
       </div>
-    </div>\n    {opened && <div className="library-open-scene">
-      <div className="library-open-heading">
-        <p className="library-overline">LES ÉDITIONS VEYLAN · SÉLECTION DU MOMENT</p>
-        <h2>Choisissez votre<br /><em>prochaine lecture.</em></h2>
-        <p>Faites tourner le présentoir, découvrez chaque ouvrage et choisissez celui qui vous accompagnera.</p>
+
+      <div className="knowledge-bottom">
+        <span>UNE NOUVELLE FAÇON D'APPRENDRE</span>
+        <span>FAITES DÉFILER POUR DÉCOUVRIR <ArrowDown size={13} /></span>
       </div>
-      <div className="book-display-area">
-        <div className="book-display-halo" />
-        <div className="book-carousel">
-          {books.map((book, index) => {
-            const offset = (index - active + books.length) % books.length;
-            const position = offset === 0 ? "book-position-center" : offset === 1 ? "book-position-right" : "book-position-left";
-            return <button type="button" key={book.id} className={`library-book ${position} ${index === active ? "library-book-active" : ""}`} onClick={() => setActive(index)} aria-label={`Sélectionner ${book.title}`} aria-pressed={index === active}>
-              <span className="physical-book"><span className="physical-book-spine" /><span className="physical-book-cover">
-                <span className="physical-book-brand">VEYLAN DIGITAL <i>✦</i></span>
-                <span className="physical-book-ornament"><i /><b /><i /></span>
-                <strong>{book.title}</strong><small>{book.category === "Formation" ? "PARCOURS PRATIQUE" : "GUIDE · ÉDITION NUMÉRIQUE"}</small>
-                <span className="physical-book-publisher">ÉDITIONS VEYLAN</span>
-              </span></span>
-            </button>;
-          })}
+
+      <section className="knowledge-selected" id="collection">
+        <div className="selected-index">SÉLECTION DU MOMENT <span>{String(active + 1).padStart(2, "0")} / {String(safeBooks.length).padStart(2, "0")}</span></div>
+        <div className="selected-content">
+          <div><h2>{current.title}</h2><p>{current.description}</p></div>
+          <div className="selected-buy"><span>{formatPrice(current.price)}</span><Link href={`/produits/${current.slug}`}>Voir le livre <ArrowUpRight size={16} /></Link></div>
         </div>
-        <div className="rotating-bookstand"><div className="stand-top"><span /><span /><span /></div><div className="stand-column" /><div className="stand-foot" /><div className="stand-base" /></div>
-        <div className="bookstand-caption">PRÉSENTOIR CENTRAL · COLLECTION VEYLAN</div>
-      </div>
-      <div className="library-selection">
-        <div className="selection-count"><span>OUVRAGE {String(active + 1).padStart(2, "0")}</span><i /> <span>{String(books.length).padStart(2, "0")}</span></div>
-        <h3>{current.title}</h3><p>{current.description}</p>
-        <div className="selection-meta"><strong>{formatPrice(current.price)}</strong><span>{current.category} · Format numérique</span></div>
-        <div className="selection-actions">
-          <button className="book-turn-button" onClick={() => move(-1)} aria-label="Livre précédent"><ChevronLeft size={19} /></button>
-          <button className="book-turn-button" onClick={() => move(1)} aria-label="Livre suivant"><ChevronRight size={19} /></button>
-          <Link className="library-read-button" href={`/produits/${current.slug}`}>Découvrir ce livre <ArrowUpRight size={17} /></Link>
-        </div>
-        <button className="library-back-button" onClick={() => setOpened(false)}><ArrowLeft size={14} /> Revenir à la bibliothèque</button>
-      </div>
-    </div>}
-    <div className="library-bottomline"><span>APPRENDRE AVEC ÉLÉGANCE</span><span>OUVRIR · EXPLORER · ÉVOLUER</span></div>
-  </section>;
+        <div className="selected-dots">{safeBooks.map((book, index) => <button key={book.id} onClick={() => setActive(index)} className={index === active ? "selected-dot active" : "selected-dot"} aria-label={`Sélectionner ${book.title}`} />)}</div>
+      </section>
+    </section>
+  );
 }
