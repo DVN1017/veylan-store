@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, type PointerEvent } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
 import type { Product } from "@/lib/products";
@@ -8,7 +8,7 @@ import { formatPrice } from "@/lib/products";
 
 export function LibraryExperience({ books }: { books: Product[] }) {
   const safeBooks = books.slice(0, 3);
-  const [active, setActive] = useState(0);
+  useEffect(() => {\n    document.body.classList.add("immersive-home");\n    return () => document.body.classList.remove("immersive-home");\n  }, []);\n\n  const [active, setActive] = useState(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const current = safeBooks[active];
 
@@ -19,7 +19,7 @@ export function LibraryExperience({ books }: { books: Product[] }) {
     setTilt({ x: 0, y: 0 });
   };
 
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "touch") return;
     const rect = event.currentTarget.getBoundingClientRect();
     setTilt({
