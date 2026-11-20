@@ -685,7 +685,7 @@ body{background:#eee8dc!important;color:#2b2119!important;font-family:"Palatino 
 /* VEYLAN STORE — immersive knowledge library */
 :root { color-scheme: dark; }
 body { background:#050b16; color:#f2f7ff; }
-.site-header,.site-footer { display:none!important; }
+body.immersive-home .site-header,body.immersive-home .site-footer { display:none!important; }
 .knowledge-world { --ice:#a9f3ff; --cyan:#38d9f5; position:relative; isolation:isolate; overflow:hidden; min-height:100svh; padding:0 clamp(22px,5vw,84px); background:radial-gradient(ellipse at 67% 43%,#163d5b 0%,#0a1c31 38%,#050b16 76%); color:#f5f9ff; }
 .knowledge-architecture { position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none; perspective:1000px; }
 .library-dome { position:absolute; width:100%; height:110%; top:-38%; left:0; border-radius:0 0 50% 50%; border:1px solid rgba(105,215,255,.16); box-shadow:inset 0 -30px 100px rgba(32,177,239,.08),0 20px 80px rgba(0,0,0,.35); background:repeating-radial-gradient(ellipse at 50% 100%,transparent 0 90px,rgba(94,198,238,.08) 91px 92px,transparent 93px 145px); }
